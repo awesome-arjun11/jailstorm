@@ -1,0 +1,49 @@
+ {% load wagtailcore_tags %} 
+
+
+<nav class="navbar fixed-top navbar-toggleable-md navbar-inverse bg-inverse">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container">
+            <a class="navbar-brand" href="/">Jailstorm</a>
+            <div class="collapse navbar-collapse" id="navbarExample">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/forum">Forum</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact Us</a>
+                    </li>
+                </ul>
+				      <ul class="nav navbar-nav navbar-right">
+				    {% if request.user.is_authenticated %}
+                    <li>
+                    <a href="{% url "spirit:user:detail" pk=user.pk slug=user.st.slug %}">{{ request.user.username }}</a>
+                    </li>
+                    <li>
+                    <a href="{% url "spirit:user:auth:logout" %}?next={% firstof request.get_full_path|urlencode '/' %}">Logout</a>
+                    </li>
+                    {% if request.user.is_superuser %}
+                    <li>
+                     <a href="/admin">Admin</a>
+                    </li>
+                    {% endif %}
+                    {% else %}
+                    <li>
+                    <a href="{% url "spirit:user:auth:login" %}?next={% firstof request.get_full_path|urlencode '/' %}">Login</a>
+                    </li>
+                    <li>
+                    <a href="{% url "spirit:user:auth:register" %}?next={% firstof request.get_full_path|urlencode '/' %}">Register</a>
+                    </li>
+                    {% endif %}
+					</ul>
+            </div>
+        </div>
+    </nav>

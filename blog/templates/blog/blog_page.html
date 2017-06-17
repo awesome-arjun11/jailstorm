@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block content %}
+{% load blog_tags %}
+
+    <!-- Page Content -->
+    <div class="container">
+      <h1 class="mt-4">{{ page.title }}</h1>
+
+        <div class="row">
+
+            <!-- Post Content Column -->
+            <div class="col-lg-9">
+
+                <!-- Title -->
+
+                <!-- Author -->
+                <p class="lead">
+                    by 	{% with authors=page.author.all %}
+						 {% if authors %}
+						 <ul>
+						 {% for author in authors %}
+						 <li style="display: inline">
+                        {% image author.icon fill-32x32 class="img-circle" style="vertical-align: middle" %}<h6><a href="{% slugurl 'author' %}?authors={{ author.name }}">{{ author.name }} </a><small> {{author.description}}</small></h6>
+						</li>
+						{% endfor%}
+						</ul>
+		                {% endif %}
+    					{% endwith %}
+                </p>
+
+                <hr>
+            </div>
+			<div class="col-lg-3">
+			    <div class="card my-4">
+                    <h5 class="card-header">Search</h5>
+                        <div class="card-block">
+							<form action="{% url 'search' %}" method="get">
+								<div class="input-group">
+									<input type="text" name="query" class="form-control" placeholder="Search for..." {% if search_query %} value="{{ search_query }}"{% endif %}>
+									<span class="input-group-btn">
+										<input type="submit" class="btn btn-success" value="Go" class="button">
+									</span>
+								</div>
+							</form>
+						</div>
+                </div>
+			</div>
+		</div>
+		
+		<!-- row for time and catagory-->
+		<div class="row">
+		    <div class="col-lg-5">
+                <!-- Date/Time -->
+                <h4>Posted on </h4>
+				<p>{{ page.date }}</p>
+            </div>
+	        <div class="col-lg-7">
+			
+			    {% with categories=page.categories.all %}
+                {% if categories %}
+                   <h4>Posted in:</h4>
+                   <ul>
+                {% for category in categories %}
+                   <li style="display: inline">
+                    {% image category.icon fill-16x16 style="vertical-align: middle" %}
+                    <a href="{% slugurl 'categories' %}?category={{ category.name }}">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+                   </ul>
+                {% endif %}
+                {% endwith %}
+		    </div>
+        </div>
+		<!--image div-->
+         <div class="row">
+
+            <div class="col-lg-12">
+                <hr>
+			    {% with post.main_image as main_image %}
+                    {% if main_image %}
+					{% image main_image fill-360x300  class="img-fluid rounded"%}
+					{% endif %}
+                {% endwith %}
+				<!--image    22 2  2 2 2 -->
+				{% for item in page.gallery_images.all %}
+				{% image item.image fill-900x400 class="img-fluid rounded" style="float: left; margin: 10px"%}
+					<p>{{ item.caption }}</p>
+				{% endfor %}
+                <hr>
+				</div>
+
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-9">
+                <p> <div class="intro" style="font-size:120%">{{ page.intro }} </div></p>
+
+		    </div>
+			<!-- /.clo-md9 -->
+            <div class="col-lg-3">
+			    <!-- Categories Widget -->
+     		<!-- /.clo-lg3 -->
+
+
+        </div>
+        <!-- /.row 2-->
+		
+        <div class="row">
+			<div class="col-lg-9" style="font-size:120%">
+				 {{ page.body }}
+		    </div>
+			<!-- /.clo-md9 -->
+			<div class="col-lg-3">
+			            {% categorylist %}
+
+			     <!-- Side Widget -->
+<div style="display:block;" class="card my-4">
+	<h5 class="card-header">Contribute</h5>
+			
+<div class="row">	
+<div class="col-md-1"></div>
+<div class="col-md-3">
+ <style type="text/css" scoped>
+  .blog-invite {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 229px;
+  height: 208px;
+  content: "";
+  padding: 60px 0 0;
+  border-top: 0 solid;
+  border-right: 0 solid;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  border-left: 1px solid rgba(0,0,0,0.2);
+  -webkit-border-radius: 0 10px 200px / 0 200px 14px 250px;
+  border-radius: 0 10px 200px / 0 200px 14px 250px;
+  font: normal 34px/1.3 "Gochi Hand", Helvetica, sans-serif;
+  color: rgba(255,0,106,0.58);
+  text-align: center;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  white-space: pre;
+  background: -webkit-repeating-linear-gradient(-90deg, rgba(129,203,188,0.5) 0, rgba(129,203,188,0.5) 0.44%, rgba(0,0,0,0) 0.44%, rgba(0,0,0,0) 22%), #fcf59b;
+  background: -moz-repeating-linear-gradient(180deg, rgba(129,203,188,0.5) 0, rgba(129,203,188,0.5) 0.44%, rgba(0,0,0,0) 0.44%, rgba(0,0,0,0) 22%), #fcf59b;
+  background: repeating-linear-gradient(180deg, rgba(129,203,188,0.5) 0, rgba(129,203,188,0.5) 0.44%, rgba(0,0,0,0) 0.44%, rgba(0,0,0,0) 22%), #fcf59b;
+  background-position: 50% 50%;
+  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-size: auto auto;
+  background-size: auto auto;
+  -webkit-box-shadow: -3px 5px 12px 0 rgba(0,0,0,0.1) ;
+  box-shadow: -3px 5px 12px 0 rgba(0,0,0,0.1) ;
+  -webkit-transform: rotateZ(-4deg)   ;
+  transform: rotateZ(-4deg)   ;
+}
+</style>
+<link async href="http://fonts.googleapis.com/css?family=Gochi%20Hand" rel="stylesheet" type="text/css"/>
+</br>
+<a href="/contact">
+<div class="blog-invite">Want to 
+Blog
+contact!!</div>
+</a>
+</div>
+</div>
+</br>
+</div>
+</div>
+		    </div>
+			<!-- /.clo-md3 -->
+        </div>
+        <!-- /.row 3-->
+		<div class="row">
+		<div class="col-lg-6">
+		{% if page.tags.all.count %}
+					<div class="tags">
+					<h3>Tags</h3>
+				{% for tag in page.tags.all %}
+					<a href="{% slugurl 'tags' %}?tag={{ tag }}"><button class="btn btn-primary btn-xs" type="button">{{ tag }}</button></a>
+				{% endfor %}
+					</div>
+				{% endif %}
+
+		</div>
+		<div class="col-lg-6">
+		
+		</div>
+		</div>
+				
+    </div>
+    <!-- /.container -->
+
+{% endblock %}

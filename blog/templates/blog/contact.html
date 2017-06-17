@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap Contact Form Template</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/contactus.css' %}">
+ 
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script type="text/javascript" src="{% static 'js/contactus.js' %}"></script>
+
+  <style>
+  html{
+  background-image:url("{% static 'cimg/contact_bg.jpg'%}");
+  
+  
+  }
+  </style>
+    </head>
+		<body style="color:#314d5e">
+		
+
+		
+				<!-- Top menu -->
+		<nav class="navbar navbar-inverse navbar" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<h1><a style="color:#000066" href="/"><strong>JailStorm</strong></a></h1>
+				</div>
+			</div>
+		</nav>
+		<br>
+		{% if messages %}
+        <ul class="messages">
+         {% for message in messages %}
+         <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><p class="bg-success">{{ message }}</p></li>
+         {% endfor %}
+</ul>
+{% endif %}
+        <!-- Top content -->
+        <div class="top-content">
+        	
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7 col-md-offset-2 " >
+                            <h2><strong style="color:#008080">Get In Touch</strong></h1>
+                            <div class="description">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-box">
+                        	<div class="form-top">
+                        		<div class="form-top-left">
+                        			<h3>Contact us</h3>
+                            		                            	<p>
+	                            	GET IN <big><strong>Touch With Us.</strong></big>
+                            	</p>
+                        		</div>
+                        		<div class="form-top-right">
+                        			<i class="fa fa-envelope"></i>
+                        		</div>
+                            </div>
+                            <div class="form-bottom contact-form">
+			              <!--FORM-->
+						                                  <form role="form" action="" method="post">
+	                                  {% csrf_token %}
+
+								    {{ form.non_field_errors }}
+								
+								
+								
+			                    	<div class="form-group">
+									    {{ form.contact_name.errors }}
+			                    		<label class="" for="{{ form.contact_name.id_for_label }}">Name:</label>
+										{{ form.contact_name }}
+			                        </div>
+									<div class="form-group">
+									    {{ form.contact_email.errors }}
+			                    		<label class="" for="{{ form.contact_email.id_for_label }}">Email:</label>
+										{{ form.contact_email }}
+
+			                        </div>
+			                    	<div class="form-group">
+									    {{ form.contact_number.errors }}
+			                    		<label class="" for="{{ form.contact_number.id_for_label }}">Mobile No.:</label>
+										{{ form.contact_number }}
+			                        </div>
+			           			    <div class="form-group">
+									    {{ form.content.errors }}
+			                    		<label class="" for="{{ form.form_content.id_for_label }}">Message:</label>
+										{{ form.content }}
+			                        </div>
+			                        <button type="submit" class="btn">Send message</button>
+									
+									
+									
+			                    </form>
+		                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+		
+		
+<script type="text/javascript" src="{% static 'js/contactus.js' %}"></script>
+
+		</body>
+</html>

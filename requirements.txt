@@ -1,0 +1,7 @@
+django-haystack==2.5.1
+whoosh==2.7.0
+mistune==0.7.1
+django-infinite-scroll-pagination>=0.2.0,<0.3
+django-djconfig>=0.5.1,<0.6
+uni-slugify==0.1.4
+pytz

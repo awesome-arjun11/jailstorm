@@ -1,0 +1,30 @@
+             {% load wagtailcore_tags wagtailimages_tags %}
+
+		            <div class="card my-4">
+                    <h5 class="card-header">Categories</h5>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+		                		{% for category in fcategorylist%}
+                                    <li class='inline'>
+									{% image category.icon fill-50x50 style="vertical-align: middle" %}
+									<a href="{% slugurl 'categories' %}?category={{ category.name }}">{{ category.name }}</a>
+									</li></br>
+                                {% endfor %}
+                                </ul>
+                            </div>
+	                       <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+		                		{% for category in scategorylist%}
+                                    <li class='inline'>
+									{% image category.icon fill-50x50 style="vertical-align: middle" %}
+									<a href="{% slugurl 'categories' %}?category={{ category.name }}">{{ category.name }}</a>
+									</li></br>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				

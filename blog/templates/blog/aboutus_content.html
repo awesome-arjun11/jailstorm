@@ -1,0 +1,25 @@
+    
+	<!-- Page Content -->
+    <div class="container">
+{% load static wagtailimages_tags%}
+        <!-- Introduction Row -->
+        <h1 class="my-4">About Us <small>It's Nice to Meet You!</small></h1>
+        <p>Just a tech blog for tech enthusiast.<br>
+		Made with less <img style="position: relative;top:0px;" src="{% static 'img/dj.svg' %}" height="25" width="75"> and more ♥ </p>
+
+        <!-- Team Members Row -->
+        <div >
+            <div >
+			<h2 class="my-4">Our Team</h2>
+            </div>
+			{% for member in team_members %}
+
+            <div class="col-lg-4 col-sm-6 text-center mb-4">
+			    {% image member.icon fill-300x300 original class="rounded-circle img-fluid d-block mx-auto" %}
+                <h3>{{ member.name}}
+                    <small>owner</small>
+                </h3>
+                <p>{{ member.description }}</p>
+            </div>
+            {% endfor %}
+  
