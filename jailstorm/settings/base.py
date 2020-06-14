@@ -167,12 +167,8 @@ WSGI_APPLICATION = 'jailstorm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'jaildb',
-        'USER': 'arjun',
-        'PASSWORD': 'hbkstorm',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
@@ -217,8 +213,8 @@ SITE_NAME = "JailStorm"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://jailstorm.ml'
-ALLOWED_HOSTS = ['jailstorm.ml', '35.187.161.52', 'localhost', '127.0.0.1']
+BASE_URL = 'http://localhost:8000'
+ALLOWED_HOSTS = ['jailstorm.ml', 'localhost', '127.0.0.1']
 
 HAYSTACK_CONNECTIONS = {
     'default': {
@@ -238,25 +234,15 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 ]
 
 # You can change this to something like 'MyForum <noreply@example.com>'
-DEFAULT_FROM_EMAIL = 'thejailstorm@gmail.com'  # Django default
+DEFAULT_FROM_EMAIL = os.environ.get('jemail') 
 SERVER_EMAIL = DEFAULT_FROM_EMAIL  # For error notifications
 
 #GMAIL
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'thejailstorm@gmail.com'
-EMAIL_HOST_PASSWORD = 'ZXCV!@#$1234'
-EMAIL_PORT = 587
-
-#SENDINBLUE
-'''EMAIL_HOST = 'smtp-relay.sendinblue.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'thejailstorm@gmail.com'
-EMAIL_HOST_PASSWORD = 'Z1PfvTsWjqUMc0t8'''
-
-
-
-
+EMAIL_HOST = os.environ.get('SMTP_SERVER')
+EMAIL_HOST_USER = os.environ.get('SMTP_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASS')
+EMAIL_PORT = os.environ.get('SMTP_PORT') or 587
 
 
 
